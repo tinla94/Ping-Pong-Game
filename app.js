@@ -88,13 +88,24 @@ function ballMovement() {
   x += speedX;
   y += speedY;
   // bounce to left
-  if (x > canvas.width - 20) {
-    speedX -= 5;
-  }
+  if (x > canvas.width) {
+    if(y > cpuPlayerY && y < cpuPlayerY + height) {
+      speedX = -speedX;
+
+      var deltaY = y - (cpuPlayerY + height/2);
+      speedY = deltaY * 0.35;
+    }
+    else {
+      gameReset();
+    }
+}
   // ball will bounce if it hits the panels
-  if (x < 30) {
+  if (x < 0) {
     if(y > playerY && y < playerY + height){
-      speedX += 5;
+      speedX = -speedX;
+      // make the ball move faster after hitting panel
+      var deltaY = y - (playerY + height/2);
+      speedY = deltaY * 0.35;
     }else {
       gameReset();
     }
@@ -108,11 +119,22 @@ function ballMovement() {
   }
 }
 
+// create a movement for cpu player
+function cpuPlayerMovement() {
+  // if y of ball is below the panel 2 -> ball bounce back
+    if(cpuPlayerY + (height / 2) < y - 35) {
+      cpuPlayerY += 20;
+    }
+    else if(cpuPlayerY + (height / 2) > y + 35) { // if y of ball is above panel 2 -> ball bounce up
+      cpuPlayerY -= 20;
+    }
+}
+
 // keyDownHandler
 function keyDownHandler(e) {
   if(e.keyCode == 38 && playerY > 0) {
-      playerY -= 15;
-      upPressed = true;
+    playerY -= 15;
+    upPressed = true;
   }
   else if (e.keyCode == 40 && playerY + 95<canvas.height) {
     playerY += 15;
@@ -130,16 +152,7 @@ function keyUpHandler(e) {
   }
 }
 
-// create a movement for cpu player
-function cpuPlayerMovement() {
-  // if y of ball is below the panel 2 -> ball bounce back
-    if(cpuPlayerY < y) {
-      cpuPlayerY += 6;
-    }
-    else { // if y of ball is above panel 2 -> ball bounce up
-      cpuPlayerY -= 6;
-    }
-}
+
 
 
 // create a function to reset the game
@@ -147,4 +160,4 @@ function gameReset() {
   speedX = -speedX; // make ball move opposite way when we reset the game
   x = 250;
   y = 250;
-}
+};
