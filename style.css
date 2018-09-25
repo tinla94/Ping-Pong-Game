@@ -11,10 +11,7 @@ h1 {
   text-align: center;
   /* rainbow color */
   background: red;
-  background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
-  background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
-  background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
-  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  background: linear-gradient(to right, orange , yellow, red, blue);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -28,7 +25,7 @@ h1 {
 /* Game Area (Canvas) */
 #gameArea {
   border: 5px solid;
-  border-image: linear-gradient(to right, grey 25%, yellow 25%, yellow 50%,red 50%, red 75%, teal 75%) 5;
+  border-image: linear-gradient(to right,orange 25%, yellow 25%, red 50%,red 50%, yellow 75%, orange 75%) 5;
   margin: 10px auto;
   position: absolute;
 }
@@ -49,8 +46,8 @@ h1 {
 }
 
 #startButton:hover {
-  border: 2px solid red;
-  color: red;
+  border: 2px solid orange;
+  color: orange;
 }
 
 #startButton:active {
@@ -84,17 +81,14 @@ h1 {
 p{
   /* rainbow color */
   background: red;
-  background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
-  background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
-  background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
-  background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+  background: linear-gradient(to right, orange , yellow, red);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 span {
   background: blue;
-  background: linear-gradient(to right, red, white);
+  background: linear-gradient(to right, orange, yellow, red );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

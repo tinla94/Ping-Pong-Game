@@ -80,7 +80,9 @@ function gameStart() {
 //  create a function for ball
 function ball(ballX, ballY, r, rAngle, sAngle) {
   var grd = canvasContext.createLinearGradient(0, 0, 170, 0);
-  grd.addColorStop(0, "red");
+  grd.addColorStop(0, "orange");
+  grd.addColorStop(0.25, "yellow");
+  grd.addColorStop(0.5, "red");
   grd.addColorStop(1, "white");
   // use arc() to create circle
   // arc(x, y, r, sAngle, eAngle,)
