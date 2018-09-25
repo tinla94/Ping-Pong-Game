@@ -41,7 +41,7 @@ h1 {
   font-weight: bold;
   cursor: pointer;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   top: 300px;
 }
 
@@ -78,7 +78,7 @@ h1 {
   margin: 10px 200px;
 }
 
-p{
+#playerScoreDashboard > p{
   /* rainbow color */
   background: red;
   background: linear-gradient(to right, orange , yellow, red);
@@ -86,9 +86,61 @@ p{
   -webkit-text-fill-color: transparent;
 }
 
+#cpuScoreDashboard > p{
+  /* rainbow color */
+  background: red;
+  background: linear-gradient(to right, orange , yellow, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 span {
-  background: blue;
+  background: red;
   background: linear-gradient(to right, orange, yellow, red );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+
+/* modal */
+#modal {
+	background-color: rgba(0,0,0,0.4);
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	z-index: 0;
+	overflow: auto;
+}
+
+#modal-textbox {
+	height: auto;
+	width: 300px;
+  padding: 20px 30px;
+	border-radius: 20px;
+	margin: 180px auto;
+  text-align: center;
+  color: white;
+  border: 5px solid;
+  border-image: linear-gradient(to right,orange 25%, yellow 25%, red 50%,red 50%, yellow 75%, orange 75%) 5;
+}
+
+#modal-textbox > p {
+    color: white;
+}
+
+#playAgainButton {
+  padding: 15px 30px;
+  cursor: pointer;
+  border: 2px solid yellow;
+  background: orange;
+  color: red;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+#playAgainButton:hover {
+  color: yellow;
+}
+
+#playAgainButton:active {
+  color: red;
 }

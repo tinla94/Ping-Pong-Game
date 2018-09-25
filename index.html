@@ -13,6 +13,7 @@
   </head>
   <body>
   <h1> Ping Pong Game </h1>
+  <!-- Score DashBoard -->
   <div class="scoreBoard">
     <div id="playerScoreDashboard">
       <p>Player Score</p>
@@ -23,10 +24,19 @@
       <span id="cpuScore"></span>
     </div>
   </div>
+  <!-- Container -->
   <div class="container">
     <canvas id="gameArea" width="800" height="600"></canvas>
     <!-- create a start game button -->
     <button type="button" name="Start Button" id="startButton">Start Game</button>
   </div>
+  <!-- Modal -->
+<div id="modal">
+  <div id="modal-textbox">
+    <h2> Game Ends <h2>
+    <p> Do you want to play again? </p>
+    <button id="playAgainButton"> Play Again </button>
+  </div>
+</div>
   </body>
 </html>

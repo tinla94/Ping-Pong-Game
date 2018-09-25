@@ -22,15 +22,16 @@ let maxTimer = 20;
 let playerScore = 0;
 let cpuScore = 0;
 
+
 // load window.onload
 // once the window is loaded all the functions will be load immediately
 $( () => {
   // grab player score and cpu score
   let pScore = $('#playerScore');
   let cScore = $('#cpuScore');
-  console.log(pScore.text());
-  console.log(cScore.text());
-
+  // grab your Modal
+  let modal = $('#modal');
+  modal.hide();
   // start Button function
   const button = $('#startButton');
   button.click( () => {
@@ -40,19 +41,31 @@ $( () => {
     canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
     // after button is clicked
     button.hide();
-
     // use setInterval for ball bouncing
-    setInterval(() => {
+    let interval = setInterval(() => {
       gameStart(); // game start
       ballMovement(); // make ball bounce
       ballReset(); // ball timer
       //update score for both side
       pScore.text(playerScore);
       cScore.text(cpuScore);
+      checkWinner(); // check for winner
     }, 35);
     // event lisnter
     document.addEventListener('keydown', keyDownHandler, false); // keyDownHandler
     document.addEventListener('keyup', keyUpHandler, false); // keyUpHandler
+
+    // check for winner
+    const checkWinner = () => {
+      if (cpuScore == 1) {
+        modal.show();
+        clearInterval(interval);
+      }
+      if (playerScore == 1) {
+        modal.show();
+        clearInterval(interval);
+      }
+    }
   }); // setInterval()
 }); // window.load()
 
@@ -83,10 +96,9 @@ function ball(ballX, ballY, r, rAngle, sAngle) {
   // color for ball
   var grd = canvasContext.createLinearGradient(0, 0, 170, 0);
   grd.addColorStop(0, "orange");
-  grd.addColorStop(0.25, "yellow");
-  grd.addColorStop(0.5, "red");
-  grd.addColorStop(0.75, "yellow");
-  grd.addColorStop(1, "orange");
+  grd.addColorStop(0.33, "yellow");
+  grd.addColorStop(0.66, "red");
+  grd.addColorStop(1, "white");
   // create ball
   canvasContext.fillStyle = grd;
   canvasContext.beginPath();
