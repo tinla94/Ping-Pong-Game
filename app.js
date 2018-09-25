@@ -37,7 +37,7 @@ window.onload = function() {
     gameStart();
     // bounce
     ballMovement();
-  }, 30);
+  }, 25);
 
   console.log(ball(x ,y , 10, 0, 2 * Math.PI));
   // addEvent listener keydown
@@ -133,11 +133,11 @@ function cpuPlayerMovement() {
 // keyDownHandler
 function keyDownHandler(e) {
   if(e.keyCode == 38 && playerY > 0) {
-    playerY -= 15;
+    playerY -= 20;
     upPressed = true;
   }
   else if (e.keyCode == 40 && playerY + 95<canvas.height) {
-    playerY += 15;
+    playerY += 20;
     downPressed = true;
   }
 }
@@ -151,8 +151,6 @@ function keyUpHandler(e) {
     downPressed = false;
   }
 }
-
-
 
 
 // create a function to reset the game
