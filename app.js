@@ -27,15 +27,19 @@ let downPressed = false;
 // load window.onload
 // once the window is loaded all the functions will be load immediately
 $( () => {
+
   // grab your button
   const button = $('#startButton');
   button.click( () => {
     console.log('Button is clicked');
-    // after button is clicked
-    button.hide();
     // create canvas -> gameArea
     canvas = document.getElementById('gameArea'); // get element canvas in html
     canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
+    // draw line
+    middleLine();
+
+    // after button is clicked
+    button.hide();
     // use setInterval for ball bouncing
     setInterval(() => {
       //create ball()
@@ -43,8 +47,6 @@ $( () => {
       // bounce
       ballMovement();
     }, 30);
-
-    console.log(ball(x ,y , 10, 0, 2 * Math.PI));
     // addEvent listener keydown
     document.addEventListener('keydown', keyDownHandler, false);
     // add event listner keyup
@@ -168,3 +170,16 @@ const gameReset = () => {
   x = 250;
   y = 250;
 };
+
+
+
+// draw a middle line
+const middleLine = () => {
+  canvasContext.beginPath();
+  canvasContext.strokeStyle='white';
+  canvasContext.lineWidth = 2;
+  canvasContext.setLineDash([10, 10]);
+  canvasContext.moveTo(canvas.width/2, 0);
+  canvasContext.lineTo(canvas.width/2,600);
+  canvasContext.stroke();
+}
