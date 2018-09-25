@@ -42,7 +42,7 @@ $( () => {
       gameStart();
       // bounce
       ballMovement();
-    }, 25);
+    }, 30);
 
     console.log(ball(x ,y , 10, 0, 2 * Math.PI));
     // addEvent listener keydown
@@ -70,15 +70,19 @@ function gameStart() {
 
 // creating rect
   function createRect(rectX, rectY, rectWidth, rectTop) {
+    // create rect
     canvasContext.fillStyle = 'white';
     canvasContext.fillRect(rectX, rectY, rectWidth, rectTop);
   }
 
 //  create a function for ball
 function ball(ballX, ballY, r, rAngle, sAngle) {
+  var grd = canvasContext.createLinearGradient(0, 0, 170, 0);
+  grd.addColorStop(0, "red");
+  grd.addColorStop(1, "white");
   // use arc() to create circle
   // arc(x, y, r, sAngle, eAngle,)
-  canvasContext.fillStyle = 'white';
+  canvasContext.fillStyle = grd;
   canvasContext.beginPath();
   canvasContext.arc(ballX, ballY, r, rAngle, sAngle);
   canvasContext.fill();
