@@ -13,7 +13,6 @@ const width =  10;
 const height = 100;
 
 // create coordinatorY for player
-let player;
 let playerY = 250;
 
 // create coordinatorY for cpu
@@ -38,8 +37,9 @@ window.onload = function() {
     gameStart();
     // bounce
     ballMovement();
-  },25);
+  }, 30);
 
+  console.log(ball(x ,y , 10, 0, 2 * Math.PI));
   // addEvent listener keydown
   document.addEventListener('keydown', keyDownHandler, false);
   // add event listner keyup
@@ -57,9 +57,9 @@ function gameStart() {
   // ball
   ball(x ,y , 10, 0, 2 * Math.PI);
   // player
-  player = createRect(15, playerY, width, height);
+  createRect(0, playerY, width, height);
   //create cpuPlayer
-  createRect(785, cpuPlayerY, width, height);
+  createRect(canvas.width - 10, cpuPlayerY, width, height);
 }
 
 
@@ -82,20 +82,24 @@ function ball(ballX, ballY, r, rAngle, sAngle) {
 
 // make the ball move around and bounce back
 function ballMovement() {
+  // cpu movement
+  cpuPlayerMovement();
+
   x += speedX;
   y += speedY;
   // bounce to left
-  if (x > canvas.width) {
+  if (x > canvas.width - 20) {
     speedX -= 5;
   }
-  // bounce to right
-  if (x < 0) {
+  // ball will bounce if it hits the panels
+  if (x < 30) {
     if(y > playerY && y < playerY + height){
       speedX += 5;
     }else {
       gameReset();
     }
   }
+  // ball bounce to top/bottom of the walls
   if(y < 0) {
     speedY += 5;
   }
@@ -106,11 +110,11 @@ function ballMovement() {
 
 // keyDownHandler
 function keyDownHandler(e) {
-  if(e.keyCode == 38) {
+  if(e.keyCode == 38 && playerY > 0) {
       playerY -= 15;
       upPressed = true;
   }
-  else if (e.keyCode == 40) {
+  else if (e.keyCode == 40 && playerY + 95<canvas.height) {
     playerY += 15;
     downPressed = true;
   }
@@ -126,8 +130,21 @@ function keyUpHandler(e) {
   }
 }
 
+// create a movement for cpu player
+function cpuPlayerMovement() {
+  // if y of ball is below the panel 2 -> ball bounce back
+    if(cpuPlayerY < y) {
+      cpuPlayerY += 6;
+    }
+    else { // if y of ball is above panel 2 -> ball bounce up
+      cpuPlayerY -= 6;
+    }
+}
+
+
 // create a function to reset the game
 function gameReset() {
-  x = canvas.width / 2;
-  y = canvas.height / 2;
+  speedX = -speedX; // make ball move opposite way when we reset the game
+  x = 250;
+  y = 250;
 }
