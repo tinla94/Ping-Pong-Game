@@ -26,26 +26,31 @@ let downPressed = false;
 
 // load window.onload
 // once the window is loaded all the functions will be load immediately
-window.onload = function() {
-  // create canvas -> gameArea
-  canvas = document.getElementById('gameArea'); // get element canvas in html
-  canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
+$( () => {
+  // grab your button
+  const button = $('#startButton');
+  button.click( () => {
+    console.log('Button is clicked');
+    // after button is clicked
+    button.hide();
+    // create canvas -> gameArea
+    canvas = document.getElementById('gameArea'); // get element canvas in html
+    canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
+    // use setInterval for ball bouncing
+    setInterval(() => {
+      //create ball()
+      gameStart();
+      // bounce
+      ballMovement();
+    }, 25);
 
-  // use setInterval for ball bouncing
-  setInterval(() => {
-    //create ball()
-    gameStart();
-    // bounce
-    ballMovement();
-  }, 25);
-
-  console.log(ball(x ,y , 10, 0, 2 * Math.PI));
-  // addEvent listener keydown
-  document.addEventListener('keydown', keyDownHandler, false);
-  // add event listner keyup
-  document.addEventListener('keyup', keyUpHandler, false);
-
-} // window.load()
+    console.log(ball(x ,y , 10, 0, 2 * Math.PI));
+    // addEvent listener keydown
+    document.addEventListener('keydown', keyDownHandler, false);
+    // add event listner keyup
+    document.addEventListener('keyup', keyUpHandler, false);
+  }); // button click
+}); // window.load()
 
 
 // create ball
@@ -81,7 +86,7 @@ function ball(ballX, ballY, r, rAngle, sAngle) {
 
 
 // make the ball move around and bounce back
-function ballMovement() {
+const ballMovement = () => {
   // cpu movement
   cpuPlayerMovement();
 
@@ -120,7 +125,7 @@ function ballMovement() {
 }
 
 // create a movement for cpu player
-function cpuPlayerMovement() {
+const cpuPlayerMovement = () => {
   // if y of ball is below the panel 2 -> ball bounce back
     if(cpuPlayerY + (height / 2) < y - 35) {
       cpuPlayerY += 20;
@@ -131,7 +136,7 @@ function cpuPlayerMovement() {
 }
 
 // keyDownHandler
-function keyDownHandler(e) {
+const keyDownHandler = (e) => {
   if(e.keyCode == 38 && playerY > 0) {
     playerY -= 20;
     upPressed = true;
@@ -143,7 +148,7 @@ function keyDownHandler(e) {
 }
 
 // keyUpHandler
-function keyUpHandler(e) {
+const keyUpHandler= (e) =>{
   if(e.keyCode == 38) {
     upPressed = false;
   }
@@ -154,7 +159,7 @@ function keyUpHandler(e) {
 
 
 // create a function to reset the game
-function gameReset() {
+const gameReset = () => {
   speedX = -speedX; // make ball move opposite way when we reset the game
   x = 250;
   y = 250;

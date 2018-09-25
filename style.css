@@ -3,12 +3,17 @@ body, html {
   margin: 0;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
 #gameArea {
   border: 5px solid;
   border-image: linear-gradient(to right, grey 25%, yellow 25%, yellow 50%,red 50%, red 75%, teal 75%) 5;
   background-color: black;
   margin: 10px auto;
-  display: block;
+  position: absolute;
 }
 
 /* Button */
@@ -18,12 +23,11 @@ body, html {
   padding: 25px 70px;
   border-radius: 10px;
   border: 3px solid white;
-  background-color: red;
+  background-color: black;
   font-size: 20px;
   font-weight: bold;
   cursor: pointer;
-  margin: auto;
-  position: absolute;
-  left: 0;
-  right: 0;
+  position: relative;
+  z-index: 1;
+  top: 300px;
 }
