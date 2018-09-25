@@ -1,126 +1,130 @@
 // grab elements
 let canvas;
 let canvasContext;
-
 // create coordinator for ball movements
 let x = 250;
 let y = 250;
 let speedX = 10;
 let speedY = 4;
-
 // width and height for panels
 const width =  10;
 const height = 100;
-
-// create coordinatorY for player
-let playerY = 250;
-
-// create coordinatorY for cpu
+// coordinatorY for player & coordinatorY for cpu
 let cpuPlayerY = 250;
-
+let playerY = 250;
 // up/down press
 let upPressed = false;
 let downPressed = false;
-
-
+// set up timer for ball
+let ballTimer = -1;
+let maxTimer = 20;
+// playerScore and cpuScore
+let playerScore = 0;
+let cpuScore = 0;
 
 // load window.onload
 // once the window is loaded all the functions will be load immediately
 $( () => {
+  // grab player score and cpu score
+  let pScore = $('#playerScore');
+  let cScore = $('#cpuScore');
+  console.log(pScore.text());
+  console.log(cScore.text());
 
-  // grab your button
+  // start Button function
   const button = $('#startButton');
   button.click( () => {
     console.log('Button is clicked');
-    // create canvas -> gameArea
-    canvas = document.getElementById('gameArea'); // get element canvas in html
+    // Canvas Game Area
+    canvas = document.getElementById('gameArea');
     canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
-    // draw line
-    middleLine();
-
     // after button is clicked
     button.hide();
+
     // use setInterval for ball bouncing
     setInterval(() => {
-      //create ball()
-      gameStart();
-      // bounce
-      ballMovement();
-    }, 30);
-    // addEvent listener keydown
-    document.addEventListener('keydown', keyDownHandler, false);
-    // add event listner keyup
-    document.addEventListener('keyup', keyUpHandler, false);
-  }); // button click
+      gameStart(); // game start
+      ballMovement(); // make ball bounce
+      ballReset(); // ball timer
+      //update score for both side
+      pScore.text(playerScore);
+      cScore.text(cpuScore);
+    }, 35);
+    // event lisnter
+    document.addEventListener('keydown', keyDownHandler, false); // keyDownHandler
+    document.addEventListener('keyup', keyUpHandler, false); // keyUpHandler
+  }); // setInterval()
 }); // window.load()
 
 
 // create ball
 function gameStart() {
   canvasContext.fillStyle = 'black'; // background
-  // fillRect(x , y , width, height);
-  canvasContext.fillRect(0,0, canvas.width, canvas.height); // game width and height
-
-  // ball
+  canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
+  middleLine(); // draw a line
+  // create ball
   ball(x ,y , 10, 0, 2 * Math.PI);
-  // player
+  // create player
   createRect(0, playerY, width, height);
-  //create cpuPlayer
+  // create cpuPlayer
   createRect(canvas.width - 10, cpuPlayerY, width, height);
-}
+} // gameStart()
 
 
 // creating rect
   function createRect(rectX, rectY, rectWidth, rectTop) {
-    // create rect
     canvasContext.fillStyle = 'white';
     canvasContext.fillRect(rectX, rectY, rectWidth, rectTop);
   }
 
-//  create a function for ball
+
+//  create ball
 function ball(ballX, ballY, r, rAngle, sAngle) {
+  // color for ball
   var grd = canvasContext.createLinearGradient(0, 0, 170, 0);
   grd.addColorStop(0, "orange");
   grd.addColorStop(0.25, "yellow");
   grd.addColorStop(0.5, "red");
-  grd.addColorStop(1, "white");
-  // use arc() to create circle
-  // arc(x, y, r, sAngle, eAngle,)
+  grd.addColorStop(0.75, "yellow");
+  grd.addColorStop(1, "orange");
+  // create ball
   canvasContext.fillStyle = grd;
   canvasContext.beginPath();
-  canvasContext.arc(ballX, ballY, r, rAngle, sAngle);
+  canvasContext.arc(ballX, ballY, r, rAngle, sAngle); // arc(x, y, r, sAngle, eAngle,)
   canvasContext.fill();
 }
 
 
-// make the ball move around and bounce back
+// function to bounce ball around
 const ballMovement = () => {
   // cpu movement
   cpuPlayerMovement();
-
   x += speedX;
   y += speedY;
-  // bounce to left
-  if (x > canvas.width) {
+  // when ball hit right wall
+  if (x > canvas.width - 10) {
     if(y > cpuPlayerY && y < cpuPlayerY + height) {
       speedX = -speedX;
-
-      var deltaY = y - (cpuPlayerY + height/2);
+      // increasing speed when it hit paddles
+      let deltaY = y - (cpuPlayerY + height/2);
       speedY = deltaY * 0.35;
     }
     else {
-      gameReset();
+      ballTimer = 0;
+      cpuScore += 1;
     }
-}
-  // ball will bounce if it hits the panels
-  if (x < 0) {
+  }
+  // when ball hit left wall
+  if (x < 10) {
     if(y > playerY && y < playerY + height){
       speedX = -speedX;
       // make the ball move faster after hitting panel
       var deltaY = y - (playerY + height/2);
       speedY = deltaY * 0.35;
-    }else {
-      gameReset();
+    }
+    else {
+      ballTimer = 0;
+      cpuScore += 1;
     }
   }
   // ball bounce to top/bottom of the walls
@@ -130,18 +134,20 @@ const ballMovement = () => {
   if(y > canvas.height) {
     speedY -= 5;
   }
-}
+} // ballMovement()
 
-// create a movement for cpu player
+
+
+// make AI for cpu Player
 const cpuPlayerMovement = () => {
-  // if y of ball is below the panel 2 -> ball bounce back
-    if(cpuPlayerY + (height / 2) < y - 35) {
-      cpuPlayerY += 20;
-    }
-    else if(cpuPlayerY + (height / 2) > y + 35) { // if y of ball is above panel 2 -> ball bounce up
-      cpuPlayerY -= 20;
-    }
-}
+  if(cpuPlayerY + (height / 2) < y - 35) {
+    cpuPlayerY += 20; // move up
+  }
+  else if(cpuPlayerY + (height / 2) > y + 35) {
+    cpuPlayerY -= 20; // move down
+  }
+} // cpuPlayerMovement
+
 
 // keyDownHandler
 const keyDownHandler = (e) => {
@@ -153,7 +159,7 @@ const keyDownHandler = (e) => {
     playerY += 20;
     downPressed = true;
   }
-}
+} // keyDownHandler()
 
 // keyUpHandler
 const keyUpHandler= (e) =>{
@@ -168,11 +174,26 @@ const keyUpHandler= (e) =>{
 
 // create a function to reset the game
 const gameReset = () => {
-  speedX = -speedX; // make ball move opposite way when we reset the game
-  x = 250;
-  y = 250;
+    x = canvas.width / 2;
+    y = canvas.height / 2;
+    speedX = 0;
+    speedY = 0;
+    ballTimer++;
 };
 
+
+//  ball reset timer
+const ballReset = () => {
+    // ballTimer > 0 -> increase time
+    if(ballTimer >= 0){
+      gameReset();
+    }
+    if(ballTimer > maxTimer){
+      ballTimer = -1;
+      speedY = 4;
+      speedX = 10;
+    }
+}
 
 
 // draw a middle line
