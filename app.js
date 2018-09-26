@@ -73,12 +73,12 @@ $( () => {
         if(cpuScore == 5) {
           modal.show(); // show modal
           gameEnd();
-        } 
+        }
         if(playerScore == 5) {
           modal.show(); // show modal
           gameEnd();
         }
-      }, 35);
+      }, 30);
     }
 
 }); // window.load()
@@ -130,7 +130,7 @@ const ballMovement = () => {
   x += speedX;
   y += speedY;
   // when ball hit right wall
-  if (x > canvas.width - 10) {
+  if (x > 790) {
     if(y > cpuPlayerY && y < cpuPlayerY + height) {
       speedX = -speedX;
       // increasing speed when it hit paddles
@@ -139,7 +139,7 @@ const ballMovement = () => {
     }
     else {
       ballTimer = 0;
-      cpuScore += 1;
+      playerScore++;
     }
   }
   // when ball hit left wall
@@ -152,7 +152,7 @@ const ballMovement = () => {
     }
     else {
       ballTimer = 0;
-      cpuScore += 1;
+      cpuScore++;
     }
   }
   // ball bounce to top/bottom of the walls
@@ -169,10 +169,10 @@ const ballMovement = () => {
 // make AI for cpu Player
 const cpuPlayerMovement = () => {
   if(cpuPlayerY + (height / 2) < y - 35) {
-    cpuPlayerY += 20; // move up
+    cpuPlayerY += 15; // move up
   }
   else if(cpuPlayerY + (height / 2) > y + 35) {
-    cpuPlayerY -= 20; // move down
+    cpuPlayerY -= 15; // move down
   }
 } // cpuPlayerMovement
 
@@ -180,11 +180,11 @@ const cpuPlayerMovement = () => {
 // keyDownHandler
 const keyDownHandler = (e) => {
   if(e.keyCode == 38 && playerY > 0) {
-    playerY -= 20;
+    playerY -= 22;
     upPressed = true;
   }
   else if (e.keyCode == 40 && playerY + 95<canvas.height) {
-    playerY += 20;
+    playerY += 22;
     downPressed = true;
   }
 } // keyDownHandler()
