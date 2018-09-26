@@ -70,8 +70,12 @@ $( () => {
         //update score for both side
         pScore.text(playerScore);
         cScore.text(cpuScore);
-        if(cpuScore == 1) {
-          modal.show();
+        if(cpuScore == 5) {
+          modal.show(); // show modal
+          gameEnd();
+        } 
+        if(playerScore == 5) {
+          modal.show(); // show modal
           gameEnd();
         }
       }, 35);
