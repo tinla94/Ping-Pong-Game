@@ -78,7 +78,7 @@ $( () => {
           modal.show(); // show modal
           gameEnd();
         }
-      }, 30);
+      }, 25);
     }
 
 }); // window.load()
@@ -180,11 +180,11 @@ const cpuPlayerMovement = () => {
 // keyDownHandler
 const keyDownHandler = (e) => {
   if(e.keyCode == 38 && playerY > 0) {
-    playerY -= 22;
+    playerY -= 32;
     upPressed = true;
   }
   else if (e.keyCode == 40 && playerY + 95<canvas.height) {
-    playerY += 22;
+    playerY += 32;
     downPressed = true;
   }
 } // keyDownHandler()
