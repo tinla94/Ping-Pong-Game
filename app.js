@@ -22,6 +22,11 @@ let maxTimer = 20;
 let playerScore = 0;
 let cpuScore = 0;
 
+// playerScore?
+let playerScoring = false;
+let cpuScoring = false;
+
+
 // set interval
 let interval;
 
@@ -135,11 +140,12 @@ const ballMovement = () => {
       speedX = -speedX;
       // increasing speed when it hit paddles
       let deltaY = y - (cpuPlayerY + height/2);
-      speedY = deltaY * 0.35;
+      speedY = deltaY * 0.5;
     }
     else {
       ballTimer = 0;
       playerScore++;
+      playerScoring = true;
     }
   }
   // when ball hit left wall
@@ -148,11 +154,12 @@ const ballMovement = () => {
       speedX = -speedX;
       // make the ball move faster after hitting panel
       var deltaY = y - (playerY + height/2);
-      speedY = deltaY * 0.35;
+      speedY = deltaY * 0.5;
     }
     else {
       ballTimer = 0;
       cpuScore++;
+      cpuScoring = true;
     }
   }
   // ball bounce to top/bottom of the walls
@@ -231,8 +238,15 @@ const ballReset = () => {
     }
     if(ballTimer > maxTimer){
       ballTimer = -1;
-      speedY = 4;
-      speedX = 10;
+      if(playerScoring == true) {
+        speedY = 4;
+        speedX = 10;
+      }
+      else if (cpuScoring == true){
+        speedY = -4;
+        speedX = -10;
+      }
+
     }
 }
 
