@@ -140,7 +140,7 @@ const ballMovement = () => {
       speedX = -speedX;
       // increasing speed when it hit paddles
       let deltaY = y - (cpuPlayerY + height/2);
-      speedY = deltaY * 0.5;
+      speedY = deltaY * 0.4;
     }
     else {
       ballTimer = 0;
@@ -154,7 +154,7 @@ const ballMovement = () => {
       speedX = -speedX;
       // make the ball move faster after hitting panel
       var deltaY = y - (playerY + height/2);
-      speedY = deltaY * 0.5;
+      speedY = deltaY * 0.4;
     }
     else {
       ballTimer = 0;
@@ -176,10 +176,10 @@ const ballMovement = () => {
 // make AI for cpu Player
 const cpuPlayerMovement = () => {
   if(cpuPlayerY + (height / 2) < y - 35) {
-    cpuPlayerY += 15; // move up
+    cpuPlayerY += 20; // move up
   }
   else if(cpuPlayerY + (height / 2) > y + 35) {
-    cpuPlayerY -= 15; // move down
+    cpuPlayerY -= 20; // move down
   }
 } // cpuPlayerMovement
 
