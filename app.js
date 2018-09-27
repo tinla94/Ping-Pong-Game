@@ -135,7 +135,7 @@ const ballMovement = () => {
   x += speedX;
   y += speedY;
   // when ball hit right wall
-  if (x > 790) {
+  if (x > 795) {
     if(y > cpuPlayerY && y < cpuPlayerY + height) {
       speedX = -speedX;
       // increasing speed when it hit paddles
@@ -149,7 +149,7 @@ const ballMovement = () => {
     }
   }
   // when ball hit left wall
-  if (x < 10) {
+  if (x < 5) {
     if(y > playerY && y < playerY + height){
       speedX = -speedX;
       // make the ball move faster after hitting panel
