@@ -1,13 +1,17 @@
 **INTRODUCTION**
 --------------------
 
+###Ping-Pong-Game
+
 A 2D simulator game which is made for all ages. This game is made by HTML, HTML Canvase, Javascript, Jquery and CSS.
+
+https://github.com/tinla94/Ping-Pong-Game
 
 
 **FEATURE**
 -----------
 
-1. Adding HTML Canvas to make game smooth.
+1. Using HTML Canvas to make game smooth.
 
 2. Using JS and Jquery to make an AI paddle moving on its own.
 
@@ -34,12 +38,26 @@ A 2D simulator game which is made for all ages. This game is made by HTML, HTML 
     2. Copy and paste this link     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> in to your head of html
     3. You can use google fonts by adding it to font-family in CSS.
     
+    
+    **GAME CODE**
+    --------------------
+    
+1.  Use "Start Game" to trigger the game once user CLICKED it
+
+```
+const button = $('#startButton');
+button.on('click', () => {
+gameStart();
+button.hide();
+});
+```
+    
 
 **SUPPORT**
 ----------------
 
-
-You can contact me at tinla14@gmail.com for any issues.
+1. You can contact me at tinla14@gmail.com for any issues.
+2. Create new issue at "Issue" tag above.
 
 
     
