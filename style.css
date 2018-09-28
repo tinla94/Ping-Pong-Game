@@ -121,6 +121,22 @@ span {
   color: white;
   border: 5px solid;
   border-image: linear-gradient(to right,orange 25%, yellow 25%, red 50%,red 50%, yellow 75%, orange 75%) 5;
+  animation: modalSpinningAnimation;
+  animation-duration: 2s;
+}
+
+@keyframes modalSpinningAnimation {
+    0%{
+        border: 2px solid transparent;
+        transform: translate(600px);
+    }
+    50%{
+        border: 2px solid #cecdb9;
+        transform: rotate(-600deg);
+    }
+    100%{
+        border: 2px solid transparent;
+    }
 }
 
 #modal-textbox > p {
