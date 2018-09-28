@@ -50,6 +50,8 @@ $( () => {
   // play again button
   const playAgainButton = $('#playAgainButton');
   playAgainButton.on('click', () => {
+    playerScore = 0;
+    cpuScore = 0;
     modal.css('display', 'none');
     gameRestart();
   });
@@ -228,8 +230,8 @@ const gameEnd = () => {
   speedX = 0;
   speedY = 0;
   ballTimer = -1;
-  cpuScore = 0;
-  playerScore = 0;
+  cpuScore = cpuScore;
+  playerScore = playerScore;
 }
 
 const gameRestart = () => {
