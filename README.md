@@ -1,7 +1,7 @@
 **INTRODUCTION**
 --------------------
 
-###Ping-Pong-Game
+##Ping-Pong-Game
 
 A 2D simulator game which is made for all ages. This game is made by HTML, HTML Canvase, Javascript, Jquery and CSS.
 
@@ -42,7 +42,7 @@ https://github.com/tinla94/Ping-Pong-Game
     **GAME CODE**
     --------------------
     
-1.  Use "Start Game" to trigger the game once user CLICKED it
+    1.  ###Use "Start Game" to trigger the game once user CLICKED it
 
 ```
 const button = $('#startButton');
@@ -51,7 +51,26 @@ gameStart();
 button.hide();
 });
 ```
+
+2. ###Game Start
+
+
+```
+const gameStart = () => {
+console.log('Game is started');
+
+canvas = document.getElementById('gameArea');
+canvasContext = gameArea.getContext('2d'); 
+
+intervalFunction();
+}
+```
     
+2a. Use CanvasRenderingContext2D interface for your canvas by using getContext('2d')
+--> getContext('2D') is used for drawing rectangles, text, images and other objects onto the canvas.
+
+2b. Pass in function **intervalFunction()** to create all objects of canvas.
+
 
 **SUPPORT**
 ----------------
