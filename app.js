@@ -53,50 +53,50 @@ $( () => {
     modal.css('display', 'none');
     gameRestart();
   });
-  // event lisnter
-    document.addEventListener('keydown', keyDownHandler, false); // keyDownHandler
-    document.addEventListener('keyup', keyUpHandler, false); // keyUpHandler
+
+document.addEventListener('keydown', keyDownHandler, false); // keyDownHandler
+document.addEventListener('keyup', keyUpHandler, false); // keyUpHandler
 
 
     // game start
-    const gameStart = () => {
-      // log
-      console.log('Game is started');
-      // Canvas Game Area
-      canvas = document.getElementById('gameArea');
-      canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
-      // intervalOn
-      intervalFunction();
-    }
+const gameStart = () => {
+  // log
+  console.log('Game is started');
+  // Canvas Game Area
+  canvas = document.getElementById('gameArea');
+  canvasContext = gameArea.getContext('2d'); // create your game in 2d simulator
+  // intervalOn
+  intervalFunction();
+} //gameStart()
 
-    function intervalFunction() {
-      interval = setInterval( () => {
-        gamePlay(); // game start
-        ballMovement(); // make ball bounce
-        ballReset(); // ball timer
-        //update score for both side
-        pScore.text(playerScore);
-        cScore.text(cpuScore);
-        if(cpuScore == 5) {
-          modal.show(); // show modal
-          winnerText.text('You Lost');
-          gameEnd();
-        }
-        if(playerScore == 5) {
-          modal.show(); // show modal
-          winnerText.text('You Win');
-          gameEnd();
-        }
-      }, 25);
+
+const intervalFunction = () => {
+  interval = setInterval( () => {
+    gamePlay(); // game start
+    ballMovement(); // make ball bounce
+    ballReset(); // ball timer
+    //update score for both side
+    pScore.text(playerScore);
+    cScore.text(cpuScore);
+    if(cpuScore == 5) {
+      modal.show(); // show modal
+      winnerText.text('You Lost');
+      gameEnd();
     }
+    if(playerScore == 5) {
+      modal.show(); // show modal
+      winnerText.text('You Win');
+      gameEnd();
+    }
+  }, 25);
+} // intervalFunction()
 
 }); // window.load()
 
 
 
-
 // game play
-function gamePlay() {
+const gamePlay = () => {
   canvasContext.fillStyle = 'black'; // background
   canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
   middleLine(); // draw a line
@@ -110,10 +110,10 @@ function gamePlay() {
 
 
 // creating rect
-  function createRect(rectX, rectY, rectWidth, rectTop) {
-    canvasContext.fillStyle = 'white';
-    canvasContext.fillRect(rectX, rectY, rectWidth, rectTop);
-  }
+function createRect(rectX, rectY, rectWidth, rectTop) {
+  canvasContext.fillStyle = 'white';
+  canvasContext.fillRect(rectX, rectY, rectWidth, rectTop);
+}
 
 
 //  create ball
@@ -220,6 +220,8 @@ const gameReset = () => {
     ballTimer++;
 };
 
+
+// gameEnd()
 const gameEnd = () => {
   x = canvas.width / 2;
   y = canvas.height / 2;

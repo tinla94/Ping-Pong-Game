@@ -75,7 +75,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 ### **3. IntervalFunction**
 
-
+    
     ``` 
     function intervalFunction() {
     interval = setInterval( () => {
