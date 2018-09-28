@@ -39,6 +39,8 @@ $( () => {
   // grab your Modal
   let modal = $('#modal');
   modal.hide();
+  // grab winner text
+  let winnerText = $('#winner');
   // start Button function
   const button = $('#startButton');
   button.on('click', () => {
@@ -77,10 +79,12 @@ $( () => {
         cScore.text(cpuScore);
         if(cpuScore == 5) {
           modal.show(); // show modal
+          winnerText.text('You Lost');
           gameEnd();
         }
         if(playerScore == 5) {
           modal.show(); // show modal
+          winnerText.text('You Win');
           gameEnd();
         }
       }, 25);
@@ -135,7 +139,7 @@ const ballMovement = () => {
   x += speedX;
   y += speedY;
   // when ball hit right wall
-  if (x > 795) {
+  if (x > 795 && (y >= 0 && y <= 600)) {
     if(y > cpuPlayerY && y < cpuPlayerY + height) {
       speedX = -speedX;
       // increasing speed when it hit paddles
@@ -149,7 +153,7 @@ const ballMovement = () => {
     }
   }
   // when ball hit left wall
-  if (x < 5) {
+  if (x < 5 && (y >= 0 && y <= 600)) {
     if(y > playerY && y < playerY + height){
       speedX = -speedX;
       // make the ball move faster after hitting panel
@@ -190,7 +194,7 @@ const keyDownHandler = (e) => {
     playerY -= 32;
     upPressed = true;
   }
-  else if (e.keyCode == 40 && playerY + 95<canvas.height) {
+  else if (e.keyCode == 40 && playerY + 95 < canvas.height) {
     playerY += 32;
     downPressed = true;
   }
