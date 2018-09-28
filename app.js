@@ -22,7 +22,7 @@ let maxTimer = 20;
 let playerScore = 0;
 let cpuScore = 0;
 
-// playerScore?
+// player or cpu score yet?
 let playerScoring = false;
 let cpuScoring = false;
 
@@ -144,7 +144,7 @@ const ballMovement = () => {
       speedX = -speedX;
       // increasing speed when it hit paddles
       let deltaY = y - (cpuPlayerY + height/2);
-      speedY = deltaY * 0.4;
+      speedY = deltaY * 0.37;
     }
     else {
       ballTimer = 0;
@@ -158,7 +158,7 @@ const ballMovement = () => {
       speedX = -speedX;
       // make the ball move faster after hitting panel
       var deltaY = y - (playerY + height/2);
-      speedY = deltaY * 0.4;
+      speedY = deltaY * 0.37;
     }
     else {
       ballTimer = 0;
@@ -191,11 +191,11 @@ const cpuPlayerMovement = () => {
 // keyDownHandler
 const keyDownHandler = (e) => {
   if(e.keyCode == 38 && playerY > 0) {
-    playerY -= 35;
+    playerY -= 33;
     upPressed = true;
   }
   else if (e.keyCode == 40 && playerY + 95 < canvas.height) {
-    playerY += 35;
+    playerY += 33;
     downPressed = true;
   }
 } // keyDownHandler()
