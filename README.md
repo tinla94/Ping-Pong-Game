@@ -1,7 +1,7 @@
 **INTRODUCTION**
 --------------------
 
-##Ping-Pong-Game
+### **Ping-Pong-Game**
 
 A 2D simulator game which is made for all ages. This game is made by HTML, HTML Canvase, Javascript, Jquery and CSS.
 
@@ -42,7 +42,7 @@ https://github.com/tinla94/Ping-Pong-Game
     **GAME CODE**
     --------------------
     
-    1.  ###Use "Start Game" to trigger the game once user CLICKED it
+### **1. Use "Start Game" to trigger the game once user CLICKED it**
 
 ```
 const button = $('#startButton');
@@ -52,7 +52,7 @@ button.hide();
 });
 ```
 
-2. ###Game Start
+### **2 .Game Start**
 
 
 ```
@@ -70,6 +70,86 @@ intervalFunction();
 --> getContext('2D') is used for drawing rectangles, text, images and other objects onto the canvas.
 
 2b. Pass in function **intervalFunction()** to create all objects of canvas.
+
+
+### **3. IntervalFunction**
+
+
+```
+function intervalFunction() {
+interval = setInterval( () => {
+gamePlay();
+ballMovement(); 
+ballReset(); 
+//update score for both side
+pScore.text(playerScore);
+cScore.text(cpuScore);
+if(cpuScore == 5) {
+modal.show(); // show modal
+winnerText.text('You Lost');
+gameEnd();
+}
+if(playerScore == 5) {
+modal.show(); // show modal
+winnerText.text('You Win');
+gameEnd();
+}
+}, 25);
+}
+});
+```
+
+3a. Using setInterval() to set your ball and other objects speed.
+
+3b. Pass in into gamePlay() function 
+
+        1. Create canvas area
+        ```
+        canvasContext.fillStyle = 'black'; // background
+        canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
+        ```
+
+        2. Draw a mid line in canvas to separate two sides -> middleLine()
+        ```
+        const middleLine = () => {
+        canvasContext.beginPath();
+        canvasContext.strokeStyle='white';
+        canvasContext.lineWidth = 2;
+        canvasContext.setLineDash([10, 10]);
+        canvasContext.moveTo(canvas.width/2, 0);
+        canvasContext.lineTo(canvas.width/2,600);
+        canvasContext.stroke();
+        }
+        ```
+        
+        3. Create ball for game
+        ```
+        ball(x ,y , 10, 0, 2 * Math.PI);
+        ```
+        
+        4. Create 2 paddles using createRect() function 
+        ```
+        // create player
+        createRect(0, playerY, width, height);
+        // create cpuPlayer
+        createRect(canvas.width - 10, cpuPlayerY, width, height);
+        ```
+        
+
+## Complete Code
+    ```
+    function gamePlay() {
+    canvasContext.fillStyle = 'black'; // background
+    canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
+    middleLine(); // draw a line
+    // create ball
+    ball(x ,y , 10, 0, 2 * Math.PI);
+    // create player
+    createRect(0, playerY, width, height);
+    // create cpuPlayer
+    createRect(canvas.width - 10, cpuPlayerY, width, height);
+    }
+    ```
 
 
 **SUPPORT**
