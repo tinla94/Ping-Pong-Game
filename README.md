@@ -44,27 +44,28 @@ https://github.com/tinla94/Ping-Pong-Game
     
 ### **1. Use "Start Game" to trigger the game once user CLICKED it**
 
-```
-const button = $('#startButton');
-button.on('click', () => {
-gameStart();
-button.hide();
-});
-```
+
+    ``` javascript
+    const button = $('#startButton');
+    button.on('click', () => {
+    gameStart();
+    button.hide();
+    });
+    ```
 
 ### **2 .Game Start**
 
 
-```
-const gameStart = () => {
-console.log('Game is started');
-
-canvas = document.getElementById('gameArea');
-canvasContext = gameArea.getContext('2d'); 
-
-intervalFunction();
-}
-```
+    ``` javascript
+    const gameStart = () => {
+    console.log('Game is started');
+    
+    canvas = document.getElementById('gameArea');
+    canvasContext = gameArea.getContext('2d'); 
+    
+    intervalFunction();
+    }
+    ```
     
 2a. Use CanvasRenderingContext2D interface for your canvas by using getContext('2d')
 --> getContext('2D') is used for drawing rectangles, text, images and other objects onto the canvas.
@@ -75,29 +76,29 @@ intervalFunction();
 ### **3. IntervalFunction**
 
 
-```
-function intervalFunction() {
-interval = setInterval( () => {
-gamePlay();
-ballMovement(); 
-ballReset(); 
-//update score for both side
-pScore.text(playerScore);
-cScore.text(cpuScore);
-if(cpuScore == 5) {
-modal.show(); // show modal
-winnerText.text('You Lost');
-gameEnd();
-}
-if(playerScore == 5) {
-modal.show(); // show modal
-winnerText.text('You Win');
-gameEnd();
-}
-}, 25);
-}
-});
-```
+    ``` javascript
+    function intervalFunction() {
+    interval = setInterval( () => {
+    gamePlay();
+    ballMovement(); 
+    ballReset(); 
+    //update score for both side
+    pScore.text(playerScore);
+    cScore.text(cpuScore);
+    if(cpuScore == 5) {
+    modal.show(); // show modal
+    winnerText.text('You Lost');
+    gameEnd();
+    }
+    if(playerScore == 5) {
+    modal.show(); // show modal
+    winnerText.text('You Win');
+    gameEnd();
+    }
+    }, 25);
+    }
+    });
+    ```
 
 3a. Using setInterval() to set your ball and other objects speed.
 
@@ -105,12 +106,14 @@ gameEnd();
 
         1. Create canvas area
         
+        ``` javascript
         canvasContext.fillStyle = 'black'; // background
         canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
-        
+        ```
 
         2. Draw a mid line in canvas to separate two sides -> middleLine()
         
+        ``` javascript
         const middleLine = () => {
         canvasContext.beginPath();
         canvasContext.strokeStyle='white';
@@ -120,24 +123,27 @@ gameEnd();
         canvasContext.lineTo(canvas.width/2,600);
         canvasContext.stroke();
         }
-        
+        ```
         
         3. Create ball for game
         
+        ``` javascript
         ball(x ,y , 10, 0, 2 * Math.PI);
-        
+        ```
         
         4. Create 2 paddles using createRect() function 
         
+        ``` javascript
         // create player
         createRect(0, playerY, width, height);
         // create cpuPlayer
         createRect(canvas.width - 10, cpuPlayerY, width, height);
-        
+        ```
         
 
 ## Complete Code
-    
+   
+    ``` javascript
     function gamePlay() {
     canvasContext.fillStyle = 'black'; // background
     canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
@@ -149,7 +155,146 @@ gameEnd();
     // create cpuPlayer
     createRect(canvas.width - 10, cpuPlayerY, width, height);
     }
+    ```
     
+    
+### **4. Creating Function For Objects**
+
+4a . Create a function to create ball (x , y, rAngle, sAngle)
+
+        ``` javascript
+        function ball(ballX, ballY, r, rAngle, sAngle) {
+        // color for ball
+        var grd = canvasContext.createLinearGradient(0, 0, 170, 0);
+        grd.addColorStop(0, "orange");
+        grd.addColorStop(0.33, "yellow");
+        grd.addColorStop(0.66, "red");
+        grd.addColorStop(1, "white");
+        // create ball
+        canvasContext.fillStyle = grd;
+        canvasContext.beginPath();
+        canvasContext.arc(ballX, ballY, r, rAngle, sAngle); // arc(x, y, r, sAngle, eAngle,)
+        canvasContext.fill();
+        }
+        ```
+
+4b. Create a function to create rectangles (x ,y , width, height)
+
+        ``` javascript
+        function createRect(rectX, rectY, rectWidth, rectTop) {
+        canvasContext.fillStyle = 'white';
+        canvasContext.fillRect(rectX, rectY, rectWidth, rectTop);
+        }
+        ```
+
+
+### ***5. Creating a function to move ball around*** 
+
+    ```javascript
+    // function to bounce ball around
+    const ballMovement = () => {
+    // cpu movement
+    cpuPlayerMovement();
+    x += speedX;
+    y += speedY;
+    // when ball hit right wall
+    if (x > 795 && (y >= 0 && y <= 600)) {
+    if(y > cpuPlayerY && y < cpuPlayerY + height) {
+    speedX = -speedX;
+    // increasing speed when it hit paddles
+    let deltaY = y - (cpuPlayerY + height/2);
+    speedY = deltaY * 0.4;
+    }
+    else {
+    ballTimer = 0;
+    playerScore++;
+    playerScoring = true;
+    }
+    }
+    // when ball hit left wall
+    if (x < 5 && (y >= 0 && y <= 600)) {
+    if(y > playerY && y < playerY + height){
+    speedX = -speedX;
+    // make the ball move faster after hitting panel
+    var deltaY = y - (playerY + height/2);
+    speedY = deltaY * 0.4;
+    }
+    else {
+    ballTimer = 0;
+    cpuScore++;
+    cpuScoring = true;
+    }
+    }
+    // ball bounce to top/bottom of the walls
+    if(y < 0) {
+    speedY += 5;
+    }
+    if(y > canvas.height) {
+    speedY -= 5;
+    }
+    } // ballMovement()
+    ```
+    
+
+### ***6. Creating a function for AI Paddle*** 
+
+    ``` javascript
+    // make AI for cpu Player
+    const cpuPlayerMovement = () => {
+    if(cpuPlayerY + (height / 2) < y - 35) {
+    cpuPlayerY += 20; // move up
+    }
+    else if(cpuPlayerY + (height / 2) > y + 35) {
+    cpuPlayerY -= 20; // move down
+    }
+    } // cpuPlayerMovement
+    ```
+    
+
+### ***7. Creating a function to move player paddles up/down*** 
+
+7a. Create a function when you press your key up
+
+    ``` javascript
+    // keyDownHandler
+    const keyDownHandler = (e) => {
+    if(e.keyCode == 38 && playerY > 0) {
+    playerY -= 35;
+    upPressed = true;
+    }
+    else if (e.keyCode == 40 && playerY + 95 < canvas.height) {
+    playerY += 35;
+    downPressed = true;
+    }
+    } // keyDownHandler()
+    ```
+    
+7b. Create a function when  you press your key down
+
+    ``` javascript
+    // keyUpHandler
+    const keyUpHandler= (e) =>{
+    if(e.keyCode == 38) {
+    upPressed = false;
+    }
+    else if (e.keyCode == 40) {
+    downPressed = false;
+    }
+    }
+    ```
+    
+7c. Trigger your keys in window.onload()
+
+    ``` javascript
+    document.addEventListener('keydown', keyDownHandler, false); // keyDownHandler
+    document.addEventListener('keyup', keyUpHandler, false); // keyUpHandler
+    ```
+
+
+
+
+
+
 
 
 **SUPPORT**
