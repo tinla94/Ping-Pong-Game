@@ -191,11 +191,11 @@ const cpuPlayerMovement = () => {
 // keyDownHandler
 const keyDownHandler = (e) => {
   if(e.keyCode == 38 && playerY > 0) {
-    playerY -= 32;
+    playerY -= 35;
     upPressed = true;
   }
   else if (e.keyCode == 40 && playerY + 95 < canvas.height) {
-    playerY += 32;
+    playerY += 35;
     downPressed = true;
   }
 } // keyDownHandler()
