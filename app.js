@@ -144,7 +144,7 @@ const ballMovement = () => {
       speedX = -speedX;
       // increasing speed when it hit paddles
       let deltaY = y - (cpuPlayerY + height/2);
-      speedY = deltaY * 0.37;
+      speedY = deltaY * 0.38;
     }
     else {
       ballTimer = 0;
@@ -158,7 +158,7 @@ const ballMovement = () => {
       speedX = -speedX;
       // make the ball move faster after hitting panel
       var deltaY = y - (playerY + height/2);
-      speedY = deltaY * 0.37;
+      speedY = deltaY * 0.38;
     }
     else {
       ballTimer = 0;
