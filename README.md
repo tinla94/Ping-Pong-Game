@@ -107,10 +107,10 @@ gameEnd();
         ```
         canvasContext.fillStyle = 'black'; // background
         canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
-        ```
+        
 
         2. Draw a mid line in canvas to separate two sides -> middleLine()
-        ```
+        
         const middleLine = () => {
         canvasContext.beginPath();
         canvasContext.strokeStyle='white';
@@ -120,12 +120,12 @@ gameEnd();
         canvasContext.lineTo(canvas.width/2,600);
         canvasContext.stroke();
         }
-        ```
+        
         
         3. Create ball for game
-        ```
+        
         ball(x ,y , 10, 0, 2 * Math.PI);
-        ```
+        
         
         4. Create 2 paddles using createRect() function 
         ```
@@ -137,7 +137,7 @@ gameEnd();
         
 
 ## Complete Code
-    ```
+    
     function gamePlay() {
     canvasContext.fillStyle = 'black'; // background
     canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
