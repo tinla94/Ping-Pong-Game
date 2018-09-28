@@ -250,9 +250,8 @@ const ballReset = () => {
         speedY = -4;
         speedX = -10;
       }
-
     }
-}
+} // ballReset()
 
 
 // draw a middle line

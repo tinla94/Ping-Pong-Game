@@ -45,7 +45,7 @@ https://github.com/tinla94/Ping-Pong-Game
 ### **1. Use "Start Game" to trigger the game once user CLICKED it**
 
 
-    ``` javascript
+    ``` 
     const button = $('#startButton');
     button.on('click', () => {
     gameStart();
@@ -56,7 +56,7 @@ https://github.com/tinla94/Ping-Pong-Game
 ### **2 .Game Start**
 
 
-    ``` javascript
+    ``` 
     const gameStart = () => {
     console.log('Game is started');
     
@@ -76,7 +76,7 @@ https://github.com/tinla94/Ping-Pong-Game
 ### **3. IntervalFunction**
 
 
-    ``` javascript
+    ``` 
     function intervalFunction() {
     interval = setInterval( () => {
     gamePlay();
@@ -106,14 +106,14 @@ https://github.com/tinla94/Ping-Pong-Game
 
         1. Create canvas area
         
-        ``` javascript
+        ``` 
         canvasContext.fillStyle = 'black'; // background
         canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
         ```
 
         2. Draw a mid line in canvas to separate two sides -> middleLine()
         
-        ``` javascript
+        ``` 
         const middleLine = () => {
         canvasContext.beginPath();
         canvasContext.strokeStyle='white';
@@ -127,13 +127,13 @@ https://github.com/tinla94/Ping-Pong-Game
         
         3. Create ball for game
         
-        ``` javascript
+        ``` 
         ball(x ,y , 10, 0, 2 * Math.PI);
         ```
         
         4. Create 2 paddles using createRect() function 
         
-        ``` javascript
+        ``` 
         // create player
         createRect(0, playerY, width, height);
         // create cpuPlayer
@@ -143,7 +143,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 ## Complete Code
    
-    ``` javascript
+    ``` 
     function gamePlay() {
     canvasContext.fillStyle = 'black'; // background
     canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
@@ -162,7 +162,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 4a . Create a function to create ball (x , y, rAngle, sAngle)
 
-        ``` javascript
+        ``` 
         function ball(ballX, ballY, r, rAngle, sAngle) {
         // color for ball
         var grd = canvasContext.createLinearGradient(0, 0, 170, 0);
@@ -180,7 +180,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 4b. Create a function to create rectangles (x ,y , width, height)
 
-        ``` javascript
+        ``` 
         function createRect(rectX, rectY, rectWidth, rectTop) {
         canvasContext.fillStyle = 'white';
         canvasContext.fillRect(rectX, rectY, rectWidth, rectTop);
@@ -190,7 +190,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 ### ***5. Creating a function to move ball around*** 
 
-    ```javascript
+    ```
     // function to bounce ball around
     const ballMovement = () => {
     // cpu movement
@@ -238,7 +238,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 ### ***6. Creating a function for AI Paddle*** 
 
-    ``` javascript
+    ``` 
     // make AI for cpu Player
     const cpuPlayerMovement = () => {
     if(cpuPlayerY + (height / 2) < y - 35) {
@@ -255,7 +255,7 @@ https://github.com/tinla94/Ping-Pong-Game
 
 7a. Create a function when you press your key up
 
-    ``` javascript
+    ``` 
     // keyDownHandler
     const keyDownHandler = (e) => {
     if(e.keyCode == 38 && playerY > 0) {
@@ -271,7 +271,7 @@ https://github.com/tinla94/Ping-Pong-Game
     
 7b. Create a function when  you press your key down
 
-    ``` javascript
+    ``` 
     // keyUpHandler
     const keyUpHandler= (e) =>{
     if(e.keyCode == 38) {
@@ -291,10 +291,65 @@ https://github.com/tinla94/Ping-Pong-Game
     ```
 
 
+### ***9. Ball Timer***
+
+9a. Set the ball at 0 once it hit the wall
+
+    ```
+    const gameRestart = () => {
+    ballTimer = 0;
+    }
+    ```
+    
+9b. Make the ball stop for 20 seconds before moving again
+
+    ```
+    //  ball reset timer
+    const ballReset = () => {
+    // ballTimer > 0 -> increase time
+    if(ballTimer >= 0){
+    gameReset();
+    }
+    if(ballTimer > maxTimer){
+    ballTimer = -1;
+    if(playerScoring == true) {
+    speedY = 4;
+    speedX = 10;
+    }
+    else if (cpuScoring == true){
+    speedY = -4;
+    speedX = -10;
+    }
+    }
+    }
+    ```
+
+### ***10. Creating game reset***
+
+    ```
+    const gameReset = () => {
+    x = canvas.width / 2;
+    y = canvas.height / 2;
+    speedX = 0;
+    speedY = 0;
+    ballTimer++;
+    };
+    ```
 
 
+### ***11. Creating game end***
 
-
+    ```
+    const gameEnd = () => {
+    x = canvas.width / 2;
+    y = canvas.height / 2;
+    speedX = 0;
+    speedY = 0;
+    ballTimer = -1;
+    cpuScore = 0;
+    playerScore = 0;
+    }
+    ```
 
 
 **SUPPORT**
