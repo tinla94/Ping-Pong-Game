@@ -104,7 +104,7 @@ gameEnd();
 3b. Pass in into gamePlay() function 
 
         1. Create canvas area
-        ```
+        
         canvasContext.fillStyle = 'black'; // background
         canvasContext.fillRect(0,0, canvas.width, canvas.height); // x,y,width,height;
         
@@ -128,12 +128,12 @@ gameEnd();
         
         
         4. Create 2 paddles using createRect() function 
-        ```
+        
         // create player
         createRect(0, playerY, width, height);
         // create cpuPlayer
         createRect(canvas.width - 10, cpuPlayerY, width, height);
-        ```
+        
         
 
 ## Complete Code
@@ -149,7 +149,7 @@ gameEnd();
     // create cpuPlayer
     createRect(canvas.width - 10, cpuPlayerY, width, height);
     }
-    ```
+    
 
 
 **SUPPORT**
